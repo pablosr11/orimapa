@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Location } from '@/lib/types';
@@ -19,8 +18,8 @@ const MapView = ({ locations, selectedLocation, onSelectLocation, className }: M
   const markers = useRef<{[key: string]: mapboxgl.Marker}>({});
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   
-  // Use the provided Mapbox token directly
-  const mapboxToken = 'pk.eyJ1IjoicHNpZXN0YTExIiwiYSI6ImNsZW84aXd4ZDFtdGIzeW40YnR5dGNtdGcifQ.bD-6Q2lyNWlSzoLs0zh7Lw';
+  // Use environment variable for Mapbox token
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
   
   useEffect(() => {
     // Don't initialize map if container ref is not available

@@ -67,3 +67,19 @@ Simply open [Lovable](https://lovable.dev/projects/68f81f9d-a7ea-4842-a768-65660
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+## Environment Variables
+
+Before running the application, you need to set up your environment variables:
+
+1. Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+
+2. Update the `.env` file with your Mapbox API token:
+```
+VITE_MAPBOX_TOKEN=your_mapbox_token_here
+```
+
+You can get a Mapbox API token by signing up at [Mapbox](https://www.mapbox.com/).
