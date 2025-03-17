@@ -13,52 +13,18 @@ interface MapViewProps {
   className?: string;
 }
 
-// Component to collect the Mapbox token if not already in localStorage
-const MapboxTokenInput = ({ onSubmit }: { onSubmit: (token: string) => void }) => {
-  const [token, setToken] = useState<string>('');
-  
-  return (
-    <div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-      <h3 className="font-semibold mb-2">Enter your Mapbox Public Token</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
-        Visit <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline">mapbox.com</a> to sign up and get a free public token.
-      </p>
-      <div className="flex gap-2">
-        <input 
-          type="text" 
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-          placeholder="pk.eyJ1Ijoi..."
-          className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg flex-grow"
-        />
-        <button 
-          onClick={() => onSubmit(token)}
-          className="bg-primary text-white px-4 py-2 rounded-lg"
-        >
-          Save
-        </button>
-      </div>
-    </div>
-  );
-};
-
 const MapView = ({ locations, selectedLocation, onSelectLocation, className }: MapViewProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<{[key: string]: mapboxgl.Marker}>({});
   const [isMapLoaded, setIsMapLoaded] = useState(false);
-  const [mapboxToken, setMapboxToken] = useState<string | null>(
-    localStorage.getItem('mapboxToken')
-  );
   
-  const handleTokenSubmit = (token: string) => {
-    localStorage.setItem('mapboxToken', token);
-    setMapboxToken(token);
-  };
+  // Use the provided Mapbox token directly
+  const mapboxToken = 'pk.eyJ1IjoicHNpZXN0YTExIiwiYSI6ImNsZW84aXd4ZDFtdGIzeW40YnR5dGNtdGcifQ.bD-6Q2lyNWlSzoLs0zh7Lw';
   
   useEffect(() => {
-    // Don't initialize map if we don't have a token
-    if (!mapboxToken || !mapContainerRef.current) return;
+    // Don't initialize map if container ref is not available
+    if (!mapContainerRef.current) return;
     
     // Clean up any existing map instance
     if (map.current) {
@@ -72,8 +38,8 @@ const MapView = ({ locations, selectedLocation, onSelectLocation, className }: M
       const newMap = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-15.4300, 28.1300], // Gran Canaria coordinates (Las Palmas)
-        zoom: 12
+        center: [-15.5972, 27.9653], // Center of Gran Canaria
+        zoom: 9.5 // Zoomed out to show more of the island
       });
       
       map.current = newMap;
@@ -109,11 +75,8 @@ const MapView = ({ locations, selectedLocation, onSelectLocation, className }: M
     } catch (err) {
       console.error('Error initializing Mapbox:', err);
       setIsMapLoaded(false);
-      // Clear token if there was an error (it might be invalid)
-      localStorage.removeItem('mapboxToken');
-      setMapboxToken(null);
     }
-  }, [mapboxToken, locations.length]);
+  }, [locations.length]);
   
   // Update markers when locations change
   useEffect(() => {
@@ -182,17 +145,6 @@ const MapView = ({ locations, selectedLocation, onSelectLocation, className }: M
     
     return marker;
   };
-  
-  if (!mapboxToken) {
-    return (
-      <div className={cn(
-        "relative w-full h-full rounded-xl overflow-hidden bg-slate-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center",
-        className
-      )}>
-        <MapboxTokenInput onSubmit={handleTokenSubmit} />
-      </div>
-    );
-  }
   
   return (
     <div className={cn("relative w-full h-full", className)}>
