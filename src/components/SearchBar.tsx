@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Search, MapPin, X } from 'lucide-react';
@@ -10,7 +9,7 @@ interface SearchBarProps {
 
 const SearchBar = ({ onSearch, className }: SearchBarProps) => {
   const [query, setQuery] = useState('');
-  const [location, setLocation] = useState('San Francisco, CA');
+  const [location, setLocation] = useState('Las Palmas, Gran Canaria');
   const [focused, setFocused] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {

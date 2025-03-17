@@ -72,7 +72,7 @@ const MapView = ({ locations, selectedLocation, onSelectLocation, className }: M
       const newMap = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-122.4194, 37.7749], // San Francisco coordinates
+        center: [-15.4300, 28.1300], // Gran Canaria coordinates (Las Palmas)
         zoom: 12
       });
       

@@ -4,15 +4,15 @@ import { Location } from '../lib/types';
 export const locations: Location[] = [
   {
     id: '1',
-    name: 'Sunny Side Café',
+    name: 'La Terraza del Sol',
     type: 'restaurant',
     image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
-    address: '123 Bright Ave, San Francisco, CA',
+    address: 'Av. de Las Canteras 32, Las Palmas de Gran Canaria',
     rating: 4.7,
     reviewCount: 128,
     coordinates: {
-      lat: 37.7749,
-      lng: -122.4194
+      lat: 28.1410,
+      lng: -15.4301
     },
     babyAmenities: ['changing_table', 'high_chair', 'kids_menu', 'stroller_friendly'],
     description: 'A bright, airy café with a dedicated kids\' corner and a menu that caters to the whole family. The spacious layout makes it easy to navigate with strollers.',
@@ -29,15 +29,15 @@ export const locations: Location[] = [
   },
   {
     id: '2',
-    name: 'Little Explorers Park',
+    name: 'Parque Doramas',
     type: 'place',
     image: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    address: '456 Park Way, San Francisco, CA',
+    address: 'Calle León y Castillo s/n, Las Palmas de Gran Canaria',
     rating: 4.9,
     reviewCount: 215,
     coordinates: {
-      lat: 37.7694,
-      lng: -122.4862
+      lat: 28.1317,
+      lng: -15.4380
     },
     babyAmenities: ['changing_table', 'nursing_area', 'play_area', 'stroller_friendly'],
     description: 'A family-friendly park with clean facilities, baby-changing stations, and a fenced toddler play area. Plenty of shade and seating for parents.',
@@ -54,15 +54,15 @@ export const locations: Location[] = [
   },
   {
     id: '3',
-    name: 'Family Table',
+    name: 'Restaurante La Marinera',
     type: 'restaurant',
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    address: '789 Family Rd, San Francisco, CA',
+    address: 'Paseo de Las Canteras 12, Las Palmas de Gran Canaria',
     rating: 4.5,
     reviewCount: 103,
     coordinates: {
-      lat: 37.7833,
-      lng: -122.4167
+      lat: 28.1405,
+      lng: -15.4320
     },
     babyAmenities: ['changing_table', 'high_chair', 'kids_menu', 'play_area'],
     description: 'A family-owned restaurant with a warm atmosphere. Features a small play area for kids and a varied menu with healthy options for children.',
@@ -79,18 +79,18 @@ export const locations: Location[] = [
   },
   {
     id: '4',
-    name: 'Tiny Tots Museum',
+    name: 'Museo Elder de la Ciencia',
     type: 'place',
     image: 'https://images.unsplash.com/photo-1594122230689-45899d9e6f69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    address: '101 Museum Circle, San Francisco, CA',
+    address: 'Parque Santa Catalina, Las Palmas de Gran Canaria',
     rating: 4.8,
     reviewCount: 176,
     coordinates: {
-      lat: 37.8021,
-      lng: -122.4059
+      lat: 28.1428,
+      lng: -15.4308
     },
     babyAmenities: ['changing_table', 'nursing_area', 'stroller_friendly', 'quiet_space'],
-    description: 'An interactive museum designed for babies and toddlers with sensory exhibits and crawling spaces. Includes multiple changing stations and quiet nursing rooms.',
+    description: 'An interactive museum designed for families with exhibits suitable for children of all ages. Includes multiple changing stations and quiet nursing rooms.',
     priceLevel: 2,
     openingHours: {
       'Monday': '10:00 AM - 5:00 PM',
@@ -104,15 +104,15 @@ export const locations: Location[] = [
   },
   {
     id: '5',
-    name: 'Green Sprout Bistro',
+    name: 'Café Botánico',
     type: 'restaurant',
     image: 'https://images.unsplash.com/photo-1564759224907-65b945ff0e4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
-    address: '555 Garden Lane, San Francisco, CA',
+    address: 'Jardín Botánico Viera y Clavijo, Las Palmas de Gran Canaria',
     rating: 4.6,
     reviewCount: 92,
     coordinates: {
-      lat: 37.7879,
-      lng: -122.4074
+      lat: 28.0681,
+      lng: -15.4630
     },
     babyAmenities: ['high_chair', 'kids_menu', 'stroller_friendly'],
     description: 'A health-focused bistro with organic baby food options and a menu that accommodates common allergies. Wide aisles for stroller accessibility.',
@@ -129,15 +129,15 @@ export const locations: Location[] = [
   },
   {
     id: '6',
-    name: 'Coastal Kid\'s Library',
+    name: 'Biblioteca Insular',
     type: 'place',
     image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    address: '321 Book Blvd, San Francisco, CA',
+    address: 'Calle Remedios 7, Las Palmas de Gran Canaria',
     rating: 4.7,
     reviewCount: 108,
     coordinates: {
-      lat: 37.7786,
-      lng: -122.3893
+      lat: 28.1344,
+      lng: -15.4331
     },
     babyAmenities: ['changing_table', 'nursing_area', 'quiet_space', 'stroller_friendly'],
     description: 'A public library with an excellent children\'s section, regular story times for babies, and comfortable seating for parents. Features a supervised play area.',
@@ -154,15 +154,15 @@ export const locations: Location[] = [
   },
   {
     id: '7',
-    name: 'Bambino Pizzeria',
+    name: 'Pizzería Amarcord',
     type: 'restaurant',
     image: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80',
-    address: '222 Pizza Way, San Francisco, CA',
+    address: 'Calle Secretario Artiles 35, Las Palmas de Gran Canaria',
     rating: 4.4,
     reviewCount: 87,
     coordinates: {
-      lat: 37.7646,
-      lng: -122.4247
+      lat: 28.1229,
+      lng: -15.4357
     },
     babyAmenities: ['high_chair', 'kids_menu', 'stroller_friendly'],
     description: 'A neighborhood pizzeria where kids can watch their pizza being made. Offers smaller portions for children and has high chairs available.',
@@ -179,15 +179,15 @@ export const locations: Location[] = [
   },
   {
     id: '8',
-    name: 'Baby Bay Beach',
+    name: 'Playa de Las Canteras',
     type: 'place',
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80',
-    address: '1 Shoreline Dr, San Francisco, CA',
+    address: 'Paseo de Las Canteras, Las Palmas de Gran Canaria',
     rating: 4.5,
     reviewCount: 156,
     coordinates: {
-      lat: 37.8073,
-      lng: -122.4301
+      lat: 28.1408,
+      lng: -15.4300
     },
     babyAmenities: ['changing_table', 'play_area', 'stroller_friendly'],
     description: 'A sheltered beach area with calm waters, clean sand, and facilities designed for families with young children. Features shaded areas and restrooms with changing tables.',
