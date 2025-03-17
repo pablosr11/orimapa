@@ -15,7 +15,7 @@ export const locations: Location[] = [
       lng: -122.4194
     },
     babyAmenities: ['changing_table', 'high_chair', 'kids_menu', 'stroller_friendly'],
-    description: 'A bright, airy café with a dedicated kids' corner and a menu that caters to the whole family. The spacious layout makes it easy to navigate with strollers.',
+    description: 'A bright, airy café with a dedicated kids\' corner and a menu that caters to the whole family. The spacious layout makes it easy to navigate with strollers.',
     priceLevel: 2,
     openingHours: {
       'Monday': '8:00 AM - 8:00 PM',
@@ -129,7 +129,7 @@ export const locations: Location[] = [
   },
   {
     id: '6',
-    name: 'Coastal Kid's Library',
+    name: 'Coastal Kid\'s Library',
     type: 'place',
     image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
     address: '321 Book Blvd, San Francisco, CA',
@@ -140,7 +140,7 @@ export const locations: Location[] = [
       lng: -122.3893
     },
     babyAmenities: ['changing_table', 'nursing_area', 'quiet_space', 'stroller_friendly'],
-    description: 'A public library with an excellent children's section, regular story times for babies, and comfortable seating for parents. Features a supervised play area.',
+    description: 'A public library with an excellent children\'s section, regular story times for babies, and comfortable seating for parents. Features a supervised play area.',
     priceLevel: 1,
     openingHours: {
       'Monday': '9:00 AM - 7:00 PM',
