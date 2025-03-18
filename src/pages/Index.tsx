@@ -1,140 +1,90 @@
-
-import { useState, useEffect } from 'react';
-import { locations } from '@/data/locations';
-import { Location, ViewState } from '@/lib/types';
-import NavBar from '@/components/NavBar';
-import SearchBar from '@/components/SearchBar';
-import ViewToggle from '@/components/ViewToggle';
-import LocationList from '@/components/LocationList';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { Location } from '@/lib/types';
+import { fetchLocations } from '@/lib/sheets';
 import MapView from '@/components/MapView';
-import LocationDetail from '@/components/LocationDetail';
-import { useToast } from '@/components/ui/use-toast';
+import LocationList from '@/components/LocationList';
+import SearchBar from '@/components/SearchBar';
+import { ViewToggle } from '@/components/ViewToggle';
 
-const Index = () => {
-  const { toast } = useToast();
-  const [viewState, setViewState] = useState<ViewState>({
-    activeView: 'list',
-    selectedLocation: null
+export default function Index() {
+  const [view, setView] = useState<'list' | 'map'>('list');
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch locations using React Query
+  const { data: locations = [], isLoading, error } = useQuery({
+    queryKey: ['locations'],
+    queryFn: fetchLocations
   });
-  const [filteredLocations, setFilteredLocations] = useState<Location[]>(locations);
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
-  useEffect(() => {
-    // Simulate page loading and animate entrance
-    const timer = setTimeout(() => {
-      setIsPageLoaded(true);
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, []);
+  // Filter locations based on search query
+  const filteredLocations = locations.filter(loc =>
+    loc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    loc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    loc.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    loc.babyAmenities.some(amenity => amenity.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
-  const handleViewChange = (view: 'list' | 'map') => {
-    setViewState(prev => ({
-      ...prev,
-      activeView: view
-    }));
-    
-    toast({
-      title: `Switched to ${view} view`,
-      description: `You're now viewing locations in ${view} view.`,
-      duration: 2000,
+  // Handle search
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    toast.success({
+      title: 'Search Results',
+      description: `Found ${filteredLocations.length} locations for "${query || 'all'}"`,
     });
   };
 
-  const handleSelectLocation = (location: Location) => {
-    setViewState(prev => ({
-      ...prev,
-      selectedLocation: location
-    }));
-  };
-
-  const handleCloseLocationDetail = () => {
-    setViewState(prev => ({
-      ...prev,
-      selectedLocation: null
-    }));
-  };
-
-  const handleSearch = (query: string, location: string) => {
-    // In a real app, this would make an API call
-    // For demo purposes, we're just filtering the static data
-    
-    const lowercaseQuery = query.toLowerCase();
-    
-    const filtered = locations.filter(loc => 
-      loc.name.toLowerCase().includes(lowercaseQuery) ||
-      loc.type.toLowerCase().includes(lowercaseQuery) ||
-      loc.address.toLowerCase().includes(lowercaseQuery) ||
-      loc.babyAmenities.some(amenity => 
-        amenity.toLowerCase().includes(lowercaseQuery)
-      )
-    );
-    
-    setFilteredLocations(filtered);
-    
-    toast({
-      title: `Search results`,
-      description: `Found ${filtered.length} locations for "${query || 'all'}"`,
-      duration: 3000,
+  // Handle view toggle
+  const handleViewToggle = (newView: 'list' | 'map') => {
+    setView(newView);
+    toast.success({
+      title: 'View Changed',
+      description: `You're now viewing locations in ${newView} view.`,
     });
   };
+
+  if (isLoading) {
+    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="flex items-center justify-center min-h-screen">Error loading locations</div>;
+  }
 
   return (
-    <div className={`min-h-screen bg-gray-50 dark:bg-gray-900 transition-opacity duration-500 ${isPageLoaded ? 'opacity-100' : 'opacity-0'}`}>
-      <NavBar />
-      
-      <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="mb-8 text-center animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-balance">
-            Find Baby-Friendly Locations
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Discover the best restaurants and places that welcome babies and young children.
-          </p>
-        </div>
-        
-        <div className="flex flex-col items-center mb-8 animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <SearchBar onSearch={handleSearch} />
-        </div>
-        
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <h2 className="text-xl font-semibold mb-4 sm:mb-0">
-            {filteredLocations.length} Locations Found
-          </h2>
-          
-          <ViewToggle
-            view={viewState.activeView}
-            onChange={handleViewChange}
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold mb-2">Find Baby-Friendly Locations</h1>
+      <p className="text-gray-600 mb-8">
+        Discover the best restaurants and places that welcome babies and young children.
+      </p>
+
+      <div className="flex flex-col gap-4 mb-8">
+        <SearchBar onSearch={handleSearch} />
+        <ViewToggle view={view} onViewChange={handleViewToggle} />
+      </div>
+
+      <p className="text-sm text-gray-500 mb-4">
+        {filteredLocations.length} Locations Found
+      </p>
+
+      <div className="relative min-h-[600px]">
+        {view === 'map' ? (
+          <MapView
+            locations={filteredLocations}
+            selectedLocation={selectedLocation}
+            onSelectLocation={setSelectedLocation}
+            className="rounded-lg shadow-lg"
           />
-        </div>
-        
-        <div className="animate-fade-in" style={{ animationDelay: '500ms' }}>
-          {viewState.activeView === 'list' ? (
-            <LocationList
-              locations={filteredLocations}
-              onSelectLocation={handleSelectLocation}
-              className="animate-view-transition"
-            />
-          ) : (
-            <div className="h-[70vh] rounded-xl overflow-hidden animate-view-transition">
-              <MapView
-                locations={filteredLocations}
-                selectedLocation={viewState.selectedLocation}
-                onSelectLocation={handleSelectLocation}
-              />
-            </div>
-          )}
-        </div>
-      </main>
-      
-      {viewState.selectedLocation && (
-        <LocationDetail
-          location={viewState.selectedLocation}
-          onClose={handleCloseLocationDetail}
-        />
-      )}
+        ) : (
+          <LocationList
+            locations={filteredLocations}
+            onSelectLocation={setSelectedLocation}
+            className="space-y-4"
+          />
+        )}
+      </div>
     </div>
   );
-};
-
-export default Index;
+}
